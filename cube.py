@@ -44,7 +44,7 @@ while True:
     yAng = math.atan2(AcZ,AcY)*180/math.pi
     zAng = math.atan2(math.sqrt(AcY*AcY+AcZ*AcZ),AcX)*180/math.pi
 
-    print("x angle: " + xAng + "  y angle: " + yAng + "  z angle: " + zAng)
+    print("Xangle:{:.4f}\tYangle:{:.4f}\tZangle:{:.4f} ".format(xAng, yAng, zAng))
     #print("Ax:{:.4f}\tAy:{:.4f}\tAz:{:.4f}\tGx:{:.4f}\tGy:{:.4f}\tGz:{:.4f} ".format(accel_data['x'], accel_data['y'],
     #                                                                                 accel_data['z'], gyro_data['x'],
     #                                                                                 gyro_data['y'], gyro_data['z']))

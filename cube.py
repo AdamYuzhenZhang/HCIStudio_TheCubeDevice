@@ -1,3 +1,4 @@
+import math
 import time
 import board
 import busio
@@ -24,6 +25,9 @@ i2c = busio.I2C(board.SCL, board.SDA)
 mpr121 = adafruit_mpr121.MPR121(i2c)
 mpu = mpu6050.mpu6050(0x68)
 
+minVal=265;
+maxVal=402;
+
 while True:
     for i in range(12):
         if mpr121[i].value:
@@ -34,7 +38,14 @@ while True:
     accel_data = mpu.get_accel_data()
     gyro_data = mpu.get_gyro_data()
 
-    print("Ax:{:.4f}\tAy:{:.4f}\tAz:{:.4f}\tGx:{:.4f}\tGy:{:.4f}\tGz:{:.4f} ".format(accel_data['x'], accel_data['y'],
-                                                                                     accel_data['z'], gyro_data['x'],
-                                                                                     gyro_data['y'], gyro_data['z']))
+    AcX, AcY, AcZ = accel_data['x'], accel_data['y'], accel_data['z']
+
+    xAng = math.atan2(AcZ,AcX)*180/math.pi
+    yAng = math.atan2(AcZ,AcY)*180/math.pi
+    zAng = math.atan2(math.sqrt(AcY*AcY+AcZ*AcZ),AcX)*180/math.pi
+
+    print("x angle: " + xAng + "  y angle: " + yAng + "  z angle: " + zAng)
+    #print("Ax:{:.4f}\tAy:{:.4f}\tAz:{:.4f}\tGx:{:.4f}\tGy:{:.4f}\tGz:{:.4f} ".format(accel_data['x'], accel_data['y'],
+    #                                                                                 accel_data['z'], gyro_data['x'],
+    #                                                                                 gyro_data['y'], gyro_data['z']))
     time.sleep(0.25)

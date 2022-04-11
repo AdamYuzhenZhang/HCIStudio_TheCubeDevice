@@ -18,7 +18,7 @@ client.connect(
     'farlab.infosci.cornell.edu',
     port=8883)
 
-topic = 'IDD/nek/twizzler'
+topic = 'IDD/HCI'
 
 i2c = busio.I2C(board.SCL, board.SDA)
 

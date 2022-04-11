@@ -197,18 +197,3 @@ class mpu6050:
         gyro = self.get_gyro_data()
 
         return [accel, gyro, temp]
-
-mpu = mpu6050(0x68)
-
-if __name__ == "__main__":
-    while (1):
-        try:
-           accel_data = mpu.get_accel_data()
-           gyro_data = mpu.get_gyro_data()
-
-           print("Ax:{:.4f}\tAy:{:.4f}\tAz:{:.4f}\tGx:{:.4f}\tGy:{:.4f}\tGz:{:.4f} ".format(accel_data['x'], accel_data['y'], accel_data['z'], gyro_data['x'], gyro_data['y'], gyro_data['z']))
-
-        except KeyboardInterrupt:
-            break
-
-        time.sleep(0.5)

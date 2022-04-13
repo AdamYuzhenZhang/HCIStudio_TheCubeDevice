@@ -24,7 +24,6 @@ topic = 'IDD/HCI'
 i2c = busio.I2C(board.SCL, board.SDA)
 
 mpr121 = adafruit_mpr121.MPR121(i2c)
-mpr121.begin()
 mpu = mpu6050.mpu6050(0x68)
 # Setup button
 button = qwiic_button.QwiicButton()
@@ -36,7 +35,6 @@ while True:
 
     if button.is_button_pressed():
         mpr121 = adafruit_mpr121.MPR121(i2c)
-        mpr121.begin()
 
     for i in range(12):
         if mpr121[i].value:

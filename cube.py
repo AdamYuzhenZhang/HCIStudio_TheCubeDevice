@@ -9,6 +9,7 @@ import paho.mqtt.client as mqtt
 import uuid
 
 import mpu6050
+import qwiic_button
 
 client = mqtt.Client(str(uuid.uuid1()))
 client.tls_set()
@@ -23,11 +24,19 @@ topic = 'IDD/HCI'
 i2c = busio.I2C(board.SCL, board.SDA)
 
 mpr121 = adafruit_mpr121.MPR121(i2c)
+mpr121.begin()
 mpu = mpu6050.mpu6050(0x68)
+# Setup button
+button = qwiic_button.QwiicButton()
+button.begin()
 
 while True:
     mpr_string = ""
     mpu_string = ""
+
+    if button.is_button_pressed():
+        mpr121 = adafruit_mpr121.MPR121(i2c)
+        mpr121.begin()
 
     for i in range(12):
         if mpr121[i].value:

@@ -65,4 +65,4 @@ while True:
 
     val = mpr_string + mpu_string
     client.publish(topic, val)
-    time.sleep(0.05)
+    time.sleep(0.5)
